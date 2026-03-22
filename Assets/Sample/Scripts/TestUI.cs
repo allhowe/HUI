@@ -6,12 +6,30 @@ using UnityEngine.UI;
 
 public class TestUI : BaseUI
 {
+    #region ObjectBinder Auto Generated
+
+    private ObjectBinder binder;
+    public Button Button_Button { get; private set; }
+
+    public void InitBind()
+    {
+        binder = View.GetComponent<ObjectBinder>();
+        Button_Button = binder.Get<Button>(nameof(Button_Button));
+
+        ObjectBinderUtility.SetButton(Button_Button,Button_ButtonOnClick);
+    }
+
+    private void Button_ButtonOnClick()
+    {
+        this.Close();
+    }
+
+
+    #endregion ObjectBinder Auto Generated
+
     protected override void OnOpen()
     {
-        View.GetComponentInChildren<Button>().onClick.AddListener(() =>
-        {
-            this.Close();
-        });
+        InitBind();
     }
 }
 

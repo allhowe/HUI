@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "a9e27c03d411d2fca01cc7410c24c97cd77cb539"
     },
+    "com.howe.objectbinder": {
+      "version": "https://github.com/allhowe/ObjectBinder.git?path=Assets/ObjectBinder",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a7d737060e8dbdf58bce0abe38f925ca07797143"
+    },
     "com.tuyoogame.yooasset": {
       "version": "2.3.16",
       "depth": 0,
