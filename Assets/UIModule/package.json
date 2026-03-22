@@ -1,0 +1,15 @@
+{
+    "name": "com.howe.uimodule",
+    "version": "1.0.0",
+    "displayName": "UIModule",
+    "description": "A lightweight UI framework.",
+    "unity": "2022.3",
+    "keywords": [
+        "ui",
+        "framework"
+    ],
+    "license": "MIT",
+    "author": {
+        "name": "Howe"
+    }
+}
