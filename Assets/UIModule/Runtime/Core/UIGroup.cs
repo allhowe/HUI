@@ -28,12 +28,12 @@ namespace UIModule
         internal SortedList<int, BaseUI> uis;
         private Dictionary<BaseUI, int> map;
 
-        public UIGroup(UIGroupInfo info, Canvas templete) {
+        public UIGroup(UIGroupInfo info, Canvas template) {
             this.Info = info;
             uis = new SortedList<int, BaseUI>(Comparer<int>.Create((a, b) => a.CompareTo(b)));
             map = new Dictionary<BaseUI, int>();
 
-            Canvas = GameObject.Instantiate(templete, templete.transform.parent);
+            Canvas = GameObject.Instantiate(template, template.transform.parent);
             Canvas.gameObject.SetActive(true);
             Canvas.name = info.name;
             Canvas.sortingOrder = info.depth;
@@ -86,7 +86,7 @@ namespace UIModule
     public class UIGroupCollection : IEnumerable<UIGroup>
     {
         private List<UIGroup> groups;
-        public UIGroupCollection(UISettings settings,Canvas templete)
+        public UIGroupCollection(UISettings settings,Canvas template)
         {
             var infos = settings.groups;
             groups = new List<UIGroup>(infos.Count);
@@ -94,7 +94,7 @@ namespace UIModule
             for (int i = 0; i < infos.Count; i++)
             {
                 var info = infos[i];
-                var group = new UIGroup(info, templete);
+                var group = new UIGroup(info, template);
                 groups.Add(group);
 
                 if (Max == null || info.depth > Max.Info.depth) Max = group;

@@ -10,12 +10,11 @@ namespace UIModule
     {
         private IUILoader loader;
         private Dictionary<string, string> paths;
-
         private Dictionary<string, BaseUI> uis;
         private HashSet<BaseUI> pendingDestroys;
 
-        internal Canvas templete;
-        internal UIScheduler scheduler;
+        private Canvas template;
+        private UIScheduler scheduler;
 
         public int Count => uis.Count;
         public IReadOnlyCollection<BaseUI> UIs => uis.Values;
@@ -35,13 +34,13 @@ namespace UIModule
             pendingDestroys = new HashSet<BaseUI>();
 
             Camera = root.GetComponentInChildren<Camera>();
-            templete = root.GetComponentInChildren<Canvas>();
-            templete.gameObject.SetActive(false);
+            template = root.GetComponentInChildren<Canvas>();
+            template.gameObject.SetActive(false);
 
             scheduler = root.AddComponent<UIScheduler>();
             scheduler.Init(settings);
 
-            Groups = new UIGroupCollection(settings, templete);
+            Groups = new UIGroupCollection(settings, template);
             Queue = new UIQueueManager(this);
 
             Events = new UIEvent();
@@ -290,7 +289,7 @@ namespace UIModule
             var hasView = prefab.TryGetComponent<BaseView>(out var view);
             Debug.Assert(hasView, $"[UI] BaseView is not found. {ui.Path}");
 
-            ui.View = GameObject.Instantiate(view, templete.transform, false);
+            ui.View = GameObject.Instantiate(view, template.transform, false);
             ui.View.name = ui.Name;
 
             SetState(ui, UIState.Open);
