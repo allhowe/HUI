@@ -13,7 +13,7 @@ namespace UIModule
         {
             string prefabPath = "UIRoot";
             var rootPrefab = Resources.Load<GameObject>(prefabPath);
-            GameObject uiRoot = PrefabUtility.InstantiatePrefab(rootPrefab) as GameObject;
+            GameObject uiRoot = GameObject.Instantiate(rootPrefab);
             uiRoot.name = rootPrefab.name;
 
             EditorUtility.SetDirty(uiRoot);
