@@ -12,13 +12,11 @@ namespace HUI
         public int depth;
     }
 
-    public class UIGroup : IEnumerable<BaseUI>
+    public class UIGroup : MonoBehaviour, IEnumerable<BaseUI>
     {
         public Canvas Canvas { get; private set; }
         public CanvasGroup CanvasGroup { get; private set; }
         public UIGroupInfo Info { get; private set; }
-
-        public Transform transform => Canvas.transform;
 
         public int Count => uis.Count;
 
@@ -28,17 +26,17 @@ namespace HUI
         internal SortedList<int, BaseUI> uis;
         private Dictionary<BaseUI, int> map;
 
-        public UIGroup(UIGroupInfo info, Canvas template) {
+        public void Init(UIGroupInfo info) {
             this.Info = info;
             uis = new SortedList<int, BaseUI>(Comparer<int>.Create((a, b) => a.CompareTo(b)));
             map = new Dictionary<BaseUI, int>();
 
-            Canvas = GameObject.Instantiate(template, template.transform.parent);
-            Canvas.gameObject.SetActive(true);
-            Canvas.name = info.name;
-            Canvas.sortingOrder = info.depth;
+            name = info.name;
 
-            CanvasGroup = Canvas.GetComponent<CanvasGroup>();
+            Canvas = GetComponent<Canvas>();
+            CanvasGroup = GetComponent<CanvasGroup>();
+
+            Canvas.sortingOrder = info.depth;
         }
         private void CalculateSiblingOptimized(BaseUI ui, Priority priority) {
             if (map.Remove(ui, out int key)) {
@@ -85,21 +83,30 @@ namespace HUI
 
     public class UIGroupCollection : IEnumerable<UIGroup>
     {
+        private UIGroup template;
         private List<UIGroup> groups;
-        public UIGroupCollection(UISettings settings,Canvas template)
+
+        public UIGroup Template => template;
+
+        public UIGroupCollection(UISettings settings,GameObject root)
         {
             var infos = settings.groups;
             groups = new List<UIGroup>(infos.Count);
 
+            template = root.GetComponentInChildren<UIGroup>();
+
             for (int i = 0; i < infos.Count; i++)
             {
                 var info = infos[i];
-                var group = new UIGroup(info, template);
+                var group = GameObject.Instantiate(template,template.transform.parent);
+                group.Init(info);
                 groups.Add(group);
 
                 if (Max == null || info.depth > Max.Info.depth) Max = group;
                 if (Min == null || info.depth < Min.Info.depth) Min = group;
             }
+
+            template.gameObject.SetActive(false);
         }
 
         public UIGroup this[int index] => groups[index];

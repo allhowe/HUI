@@ -12,8 +12,6 @@ namespace HUI
         private Dictionary<string, string> paths;
         private Dictionary<string, BaseUI> uis;
         private HashSet<BaseUI> pendingDestroys;
-
-        private Canvas template;
         private UIScheduler scheduler;
 
         public int Count => uis.Count;
@@ -33,15 +31,14 @@ namespace HUI
             uis = new Dictionary<string, BaseUI>();
             pendingDestroys = new HashSet<BaseUI>();
 
-            Camera = root.GetComponentInChildren<Camera>();
-            template = root.GetComponentInChildren<Canvas>();
-            template.gameObject.SetActive(false);
 
             scheduler = root.AddComponent<UIScheduler>();
             scheduler.Init(settings);
 
-            Groups = new UIGroupCollection(settings, template);
+            Groups = new UIGroupCollection(settings, root);
             Queue = new UIQueueManager(this);
+
+            Camera = root.GetComponentInChildren<Camera>();
 
             Events = new UIEvent();
         }
@@ -289,7 +286,7 @@ namespace HUI
             var hasView = prefab.TryGetComponent<BaseView>(out var view);
             Debug.Assert(hasView, $"[UI] BaseView is not found. {ui.Path}");
 
-            ui.View = GameObject.Instantiate(view, template.transform, false);
+            ui.View = GameObject.Instantiate(view, Groups.Template.transform, false);
             ui.View.name = ui.Name;
 
             SetState(ui, UIState.Open);

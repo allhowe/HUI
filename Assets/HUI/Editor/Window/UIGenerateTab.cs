@@ -7,7 +7,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace HUI
+namespace HUI.Editor
 {
     public class UIGenerateTab : VisualElement
     {

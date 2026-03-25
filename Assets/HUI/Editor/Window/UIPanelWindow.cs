@@ -4,7 +4,7 @@ using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 using System;
 
-namespace HUI
+namespace HUI.Editor
 {
     public class UIPanelWindow : EditorWindow
     {

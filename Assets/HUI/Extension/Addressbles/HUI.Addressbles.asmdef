@@ -3,12 +3,11 @@
     "rootNamespace": "",
     "references": [
         "HUI",
-        "HUI.Addressbles"
+        "Unity.Addressables",
+        "Unity.ResourceManager"
     ],
     "includePlatforms": [],
-    "excludePlatforms": [
-        "Editor"
-    ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],

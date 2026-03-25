@@ -3,10 +3,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace HUI
+namespace HUI.Editor
 {
     [CustomEditor(typeof(UIScheduler))]
-    public class UISchedulerEditor : Editor
+    public class UISchedulerEditor : UnityEditor.Editor
     {
         private VisualElement rootElement;
         private Foldout groupFoldout;

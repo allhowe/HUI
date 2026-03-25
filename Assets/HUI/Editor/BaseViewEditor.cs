@@ -5,7 +5,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace HUI
+namespace HUI.Editor
 {
     [CustomPropertyDrawer(typeof(ViewSettings))]
     public class ViewSettingsDrawer : PropertyDrawer
@@ -59,7 +59,7 @@ namespace HUI
 
     [CanEditMultipleObjects]
     [CustomEditor(typeof(BaseView))]
-    public class BaseViewEditor : Editor
+    public class BaseViewEditor : UnityEditor.Editor
     {
         public override VisualElement CreateInspectorGUI() {
             var root = new VisualElement();

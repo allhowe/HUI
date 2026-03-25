@@ -7,30 +7,12 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 using Object=UnityEngine.Object;
+using HUI;
 
-namespace HUI
+namespace HUI.Editor
 {
 
-    public class UISettingsPostProcessor : AssetPostprocessor
-    {
-        private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets,
-            string[] movedAssets, string[] movedFromPath) {
-            UpdatePath();
-        }
-        
-        [InitializeOnLoadMethod]
-        private static void SubscribeToReload() {
-            UpdatePath();
-        }
 
-        public static void UpdatePath() {
-            var setting = UISettings.Load();
-
-            if (setting != null) {
-                UIValidator.UpdateUIScriptPaths(setting.prefabPath, setting.scriptPath);
-            }
-        }
-    }
     
     public static class UIValidator
     {
