@@ -25,7 +25,7 @@ public class UIBuildRule : IBuildRule
         }
         return null;
     }
-    public bool IsValid(TextAsset asset)
+    public bool Validate(TextAsset asset)
     {
         if (asset == null)
         {
@@ -50,7 +50,7 @@ public class UIBuildRule : IBuildRule
             return false;
         }
 
-        return universal.IsValid(asset);
+        return universal.Validate(asset);
     }
     public void Build(ObjectBinder binder)
     {
