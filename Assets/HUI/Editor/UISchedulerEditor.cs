@@ -110,6 +110,7 @@ namespace HUI.Editor
                         text = capturedUI.Name
                     };
                     nameBtn.style.flexGrow = 1;
+                    nameBtn.style.flexShrink = 1;
                     nameBtn.style.unityTextAlign = TextAnchor.MiddleLeft;
                     nameBtn.style.backgroundColor = Color.clear;
                     nameBtn.style.borderTopWidth = nameBtn.style.borderBottomWidth =
@@ -119,7 +120,7 @@ namespace HUI.Editor
                     var stateLabel = new Label($"[{capturedUI.State}]");
                     stateLabel.style.unityTextAlign = TextAnchor.MiddleCenter;
                     stateLabel.style.color = Color.gray;
-                    stateLabel.style.width = 120;
+                    stateLabel.style.width = 80;
                     row.Add(stateLabel);
 
                     var closeBtn = new Button(() => capturedUI.Close()) { text = "Close" };
@@ -179,23 +180,24 @@ namespace HUI.Editor
                         row.style.flexDirection = FlexDirection.Row;
                         box.Add(row);
 
-                        var itembtn = new Button(() => EditorGUIUtility.PingObject(ui.View))
+                        var nameBtn = new Button(() => EditorGUIUtility.PingObject(ui.View))
                         {
                             text = command.Name
                         };
-                        itembtn.style.flexGrow = 1;
-                        itembtn.style.unityTextAlign = TextAnchor.MiddleLeft;
-                        itembtn.style.backgroundColor = Color.clear;
-                        itembtn.style.borderTopWidth = itembtn.style.borderBottomWidth =
-                        itembtn.style.borderLeftWidth = itembtn.style.borderRightWidth = 0;
-                        row.Add(itembtn);
+                        nameBtn.style.flexGrow = 1;
+                        nameBtn.style.flexShrink = 1;
+                        nameBtn.style.unityTextAlign = TextAnchor.MiddleLeft;
+                        nameBtn.style.backgroundColor = Color.clear;
+                        nameBtn.style.borderTopWidth = nameBtn.style.borderBottomWidth =
+                        nameBtn.style.borderLeftWidth = nameBtn.style.borderRightWidth = 0;
+                        row.Add(nameBtn);
 
                         if (queue.Current != null && queue.Current.Value == command)
                         {
                             var currentLabel = new Label("Current");
                             currentLabel.style.unityTextAlign = TextAnchor.MiddleCenter;
                             currentLabel.style.color = Color.gray;
-                            currentLabel.style.width = 120;
+                            currentLabel.style.width = 80;
 
                             var closeBtn = new Button(() => ui.Close()) { text = "Close" };
                             closeBtn.style.width = 60;
@@ -229,6 +231,7 @@ namespace HUI.Editor
                 box.style.paddingLeft = box.style.paddingRight = 4;
             box.style.marginTop = 2;
             box.style.marginBottom = 2;
+            box.style.marginLeft = 0;
             box.style.backgroundColor = new Color(0, 0, 0, 0.1f);
             return box;
         }
