@@ -162,9 +162,8 @@ namespace HUI
                 ui.pending = ShowUI;
                 return;
             }
-            if (ui.State == UIState.Show || ui.State == UIState.Shown)
+            if (ui.State == UIState.Show || ui.State == UIState.Shown || ui.State == UIState.Close)
             {
-                Debug.LogWarning($"[UI] {ui.Name} is already showing or active.");
                 return;
             }
 
