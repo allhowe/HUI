@@ -14,6 +14,9 @@ public class TestHUI : MonoBehaviour
 
     private void Start()
     {
+        var initialize = new YooAssetInitialize();
+        initialize.Initialize();
+
         var loader = new YooAssetsUILoader();
         var root = GameObject.Find("UIRoot");
 
